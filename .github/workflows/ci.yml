@@ -41,6 +41,33 @@ jobs:
       - name: ⬆️ Upload coverage report
         uses: codecov/codecov-action@v1
 
+  cannary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+        with:
+          useLockFile: false
+          install-command: yarn --silent
+        env:
+          HUSKY_SKIP_INSTALL: true
+
+      - name: ✍ Lint
+        run: npm run lint
+      - name: 🧪 Test
+        run: npm run test:happy-dom -- --coverage
+      - name: 🚧 Build test environments
+        run: npm run setup:env
+      - name: 🔬 Test with toolbox
+        run: npm run test:toolbox
+      - name: 🏗 Build
+        run: npm run build
+
+      - name: ⬆️ Upload coverage report
+        uses: codecov/codecov-action@v1
+
   release:
     needs: validate
     runs-on: ubuntu-latest

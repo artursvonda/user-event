@@ -32,12 +32,14 @@
     "setup:env": "node --experimental-import-meta-resolve scripts/setup.js",
     "test": "kcd-scripts test",
     "test:jest": "kcd-scripts test",
+    "test:happy-dom": "kcd-scripts test --env=@happy-dom/jest-environment",
     "test:toolbox": "NODE_OPTIONS='--experimental-vm-modules --experimental-modules --experimental-import-meta-resolve' node scripts/test.js",
     "test:debug": "kcd-scripts --inspect-brk test --runInBand",
     "test:update": "npm test -- --updateSnapshot --coverage",
     "validate": "kcd-scripts typecheck"
   },
   "devDependencies": {
+    "@happy-dom/jest-environment": "^12.6.0",
     "@ph.fritsche/scripts-config": "^2.4.0",
     "@ph.fritsche/toolbox": "^1.0.0-alpha.1",
     "@testing-library/dom": "^8.19.0",
